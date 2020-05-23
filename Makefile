@@ -1,6 +1,9 @@
 THANOS_SOURCE ?= ../thanos
 
-THANOS_BINARY ?= $(THANOS_SOURCE)/thanos
+GOPATH            ?= $(shell go env GOPATH)
+GOBIN             ?= $(firstword $(subst :, ,${GOPATH}))/bin
+
+THANOS_BINARY ?= $(GOBIN)/thanos
 
 .PHONY: help
 help: ## Displays help.

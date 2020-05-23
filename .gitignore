@@ -1,13 +1,12 @@
 data/prometheus/one/*
 data/prometheus/two/*
 data/compactor/*
-data/minio/*
+data/minio/**/*
 data/store/*
 
-!data/prometheus/one/.keep
-!data/prometheus/two/.keep
-!data/compactor/.keep
-!data/minio/.keep
-!data/store/.keep
+!data/minio/thanos-data-bucket
+data/minio/thanos-data-bucket/*
+
+!.keep
 
 thanos/thanos
