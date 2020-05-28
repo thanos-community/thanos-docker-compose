@@ -1,8 +1,8 @@
 FROM alpine:3.6 as alpine
-RUN apk add -U --no-cache ca-certificates
+RUN apk add -U --no-cache ca-certificates bash
 
-FROM scratch as builder
 ENTRYPOINT []
 WORKDIR /
-COPY --from=alpine /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/
+
 COPY ./thanos /
+COPY ./wait-for-it.sh /

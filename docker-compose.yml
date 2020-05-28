@@ -81,6 +81,9 @@ services:
       - ./prometheus:/etc/config/
       - ./data/prometheus/one:/data
     command:
+      - "/wait-for-it.sh"
+      - "prometheus_one:9001"
+      - "--"
       - "/thanos"
       - "sidecar"
       - "--log.level=debug"
@@ -110,6 +113,9 @@ services:
       - ./prometheus:/etc/config/
       - ./data/prometheus/two:/data
     command:
+      - "/wait-for-it.sh"
+      - "prometheus_two:9002"
+      - "--"
       - "/thanos"
       - "sidecar"
       - "--log.level=debug"
@@ -136,6 +142,9 @@ services:
       dockerfile: Dockerfile.thanos
     container_name: thanos_querier
     command:
+      - "/wait-for-it.sh"
+      - "thanos_sidecar_one:10901"
+      - "--"
       - "/thanos"
       - "query"
       - "--log.level=debug"
@@ -144,6 +153,8 @@ services:
       - "--store=thanos_sidecar_two:10901"
       - "--store=thanos_store:10901"
       - "--store.sd-interval=5m"
+      - "--web.route-prefix=lel"
+      # - "--web.external-prefix=."
     expose:
       - 10902
       - 10901
@@ -160,6 +171,9 @@ services:
     volumes:
       - ./data/compactor:/data
     command:
+      - "/wait-for-it.sh"
+      - "minio:9000"
+      - "--"
       - "/thanos"
       - "compact"
       - "--log.level=debug"
@@ -197,6 +211,9 @@ services:
     volumes:
       - ./data/store:/data
     command:
+      - "/wait-for-it.sh"
+      - "minio:9000"
+      - "--"
       - "/thanos"
       - "store"
       - "--log.level=debug"
