@@ -61,17 +61,17 @@ services:
       timeout: 20s
       retries: 3
 
-  grafana:
-    image: grafana/grafana:6.4.1
-    container_name: grafana
-    user: root
-    environment:
-      - GF_SECURITY_ADMIN_USER=${ADMIN_USER:-admin}
-      - GF_SECURITY_ADMIN_PASSWORD=${ADMIN_PASSWORD:-admin}
-      - GF_USERS_ALLOW_SIGN_UP=false
-    restart: unless-stopped
-    ports:
-      - "3000:3000"
+  # grafana:
+  #   image: grafana/grafana:6.4.1
+  #   container_name: grafana
+  #   user: root
+  #   environment:
+  #     - GF_SECURITY_ADMIN_USER=${ADMIN_USER:-admin}
+  #     - GF_SECURITY_ADMIN_PASSWORD=${ADMIN_PASSWORD:-admin}
+  #     - GF_USERS_ALLOW_SIGN_UP=false
+  #   restart: unless-stopped
+  #   ports:
+  #     - "3000:3000"
 
   thanos_sidecar_one:
     build:
@@ -154,7 +154,7 @@ services:
       - "--store=thanos_sidecar_two:10901"
       - "--store=thanos_store:10901"
       - "--store.sd-interval=5m"
-      - "--web.route-prefix=lel"
+      # - "--web.route-prefix=test"
       # - "--web.external-prefix=."
     expose:
       - 10902

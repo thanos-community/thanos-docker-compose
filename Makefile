@@ -27,6 +27,11 @@ up: $(THANOS_BINARY)
 	cp "$(THANOS_BINARY)" ./thanos/
 	docker-compose up -d --build
 
+.PHONY: quick
+quick: ## Restarts docker-compose to incorporate changes in docker-compose.yml
+quick:
+	docker-compose up -d
+
 .PHONY: down
 down: ## Brings down the docker-compose setup
 down:
