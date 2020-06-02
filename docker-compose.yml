@@ -61,18 +61,6 @@ services:
       timeout: 20s
       retries: 3
 
-  # grafana:
-  #   image: grafana/grafana:6.4.1
-  #   container_name: grafana
-  #   user: root
-  #   environment:
-  #     - GF_SECURITY_ADMIN_USER=${ADMIN_USER:-admin}
-  #     - GF_SECURITY_ADMIN_PASSWORD=${ADMIN_PASSWORD:-admin}
-  #     - GF_USERS_ALLOW_SIGN_UP=false
-  #   restart: unless-stopped
-  #   ports:
-  #     - "3000:3000"
-
   thanos_sidecar_one:
     build:
       context: ./thanos
@@ -239,6 +227,18 @@ services:
     depends_on:
       - minio
 
+  # grafana:
+  #   image: grafana/grafana:6.4.1
+  #   container_name: grafana
+  #   user: root
+  #   environment:
+  #     - GF_SECURITY_ADMIN_USER=${ADMIN_USER:-admin}
+  #     - GF_SECURITY_ADMIN_PASSWORD=${ADMIN_PASSWORD:-admin}
+  #     - GF_USERS_ALLOW_SIGN_UP=false
+  #   restart: unless-stopped
+  #   ports:
+  #     - "3000:3000"
+
   # bucket_web:
   #   build:
   #     context: ./thanos
@@ -262,6 +262,7 @@ services:
   #     - 8080
   #   ports:
   #     - "8080:8080"
+
   # debug:
   #   build:
   #     context: thanos
