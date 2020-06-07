@@ -12,25 +12,26 @@ scrape_configs:
 
   - job_name: 'minio'
     scrape_interval: 100ms
+    metrics_path: /minio/prometheus/metrics
     static_configs:
       - targets: ['minio:9000']
 
   - job_name: 'thanos_sidecar_two'
     scrape_interval: 100ms
     static_configs:
-      - targets: ['thanos_sidecar_two:10901', 'thanos_sidecar_two:10902']
+      - targets: ['thanos_sidecar_two:10902']
 
   - job_name: 'thanos_querier'
     scrape_interval: 100ms
     static_configs:
-      - targets: ['thanos_querier:10901', 'thanos_querier:10902']
+      - targets: ['thanos_querier:10902']
 
   - job_name: 'thanos_compactor'
     scrape_interval: 100ms
     static_configs:
-      - targets: ['thanos_compactor:10901', 'thanos_compactor:10902']
+      - targets: ['thanos_compactor:10902']
 
   - job_name: 'thanos_store'
     scrape_interval: 100ms
     static_configs:
-      - targets: ['thanos_store:10901', 'thanos_store:10902']
+      - targets: ['thanos_store:10902']

@@ -42,7 +42,7 @@ After running `make up` you would be able to access `minio` at `http://localhost
 
 | Service            |                                                                              | Ports |
 | ------------------ | ---------------------------------------------------------------------------- | ----- |
-| prometheus_one     | The first Prometheus server                                                  |       |
+| prometheus_one     | The first Prometheus server                                                  | 9001  |
 | prometheus_two     | The second Prometheus server                                                 |       |
 | minio              | A minio instance serving as Object Storage for store, compactor and sidecars | 9000  |
 | thanos_sidecar_one | First Thanos sidecar for prometheus_one                                      |       |

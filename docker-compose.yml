@@ -21,6 +21,8 @@ services:
     restart: unless-stopped
     expose:
       - 9001
+    ports:
+      - "9001:9001"
 
   prometheus_two:
     image: prom/prometheus:v2.17.0
@@ -52,6 +54,7 @@ services:
     ports:
       - "9000:9000"
     environment:
+      MINIO_PROMETHEUS_AUTH_TYPE: public
       MINIO_ACCESS_KEY: myaccesskey
       MINIO_SECRET_KEY: mysecretkey
     command: server /data
