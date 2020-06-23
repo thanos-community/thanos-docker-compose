@@ -16,7 +16,7 @@ Run a basic Thanos setup for local development using Docker and Docker Compose.
 
 - Run `make up`
 
-> NOTE: This target tries to build the binary by running `make build` inside the `$THANOS_SOURCE` directory defined in the Makefile, and then gets the `thanos` binary from `$GOPATH/bin/thanos`. You need to set up the `THANOS_SOURCE` variable for this to work.
+> NOTE: If you are using MacOS, run `GOOS=linux make up`. This target tries to build the binary by running `make build` inside the `$THANOS_SOURCE` directory defined in the Makefile, and then gets the `thanos` binary from `$GOPATH/bin/thanos`. You need to set up the `THANOS_SOURCE` variable for this to work.
 
 ### Stop the dev environment
 

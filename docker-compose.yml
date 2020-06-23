@@ -229,7 +229,9 @@ services:
       - 10901
     depends_on:
       - minio
-
+    ports:
+      - '10911:10901'
+      - '10912:10902'
   # grafana:
   #   image: grafana/grafana:6.4.1
   #   container_name: grafana
