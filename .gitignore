@@ -1,5 +1,7 @@
 data/prometheus/one/*
 data/prometheus/two/*
+data/prometheus/alertmanager/*
+data/rule/*
 data/compactor/*
 data/minio/**/*
 data/store/*

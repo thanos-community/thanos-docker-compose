@@ -1,9 +1,11 @@
 version: '3.2'
 services:
   prometheus_one:
-    image: prom/prometheus:v2.17.0
+    image: prom/prometheus:v2.20.0
     container_name: prometheus_one
     user: root
+    environment:
+      GOMAXPROCS: 2
     volumes:
       - ./prometheus:/etc/config/
       - ./data/prometheus/one:/data
@@ -25,9 +27,11 @@ services:
       - "9001:9001"
 
   prometheus_two:
-    image: prom/prometheus:v2.17.0
+    image: prom/prometheus:v2.20.0
     container_name: prometheus_two
     user: root
+    environment:
+      GOMAXPROCS: 2
     volumes:
       - ./prometheus:/etc/config/
       - ./data/prometheus/two:/data
@@ -69,6 +73,8 @@ services:
       context: ./thanos
       dockerfile: Dockerfile.thanos
     container_name: thanos_sidecar_one
+    environment:
+      GOMAXPROCS: 2
     volumes:
       - ./prometheus:/etc/config/
       - ./data/prometheus/one:/data
@@ -101,6 +107,8 @@ services:
       context: ./thanos
       dockerfile: Dockerfile.thanos
     container_name: thanos_sidecar_two
+    environment:
+      GOMAXPROCS: 2
     volumes:
       - ./prometheus:/etc/config/
       - ./data/prometheus/two:/data
@@ -144,9 +152,8 @@ services:
       - "--store=thanos_sidecar_one:10901"
       - "--store=thanos_sidecar_two:10901"
       - "--store=thanos_store:10901"
+      # - "--store=thanos_rule:10901"
       - "--store.sd-interval=5m"
-      # - "--web.route-prefix=test"
-      # - "--web.external-prefix=."
     expose:
       - 10902
       - 10901
@@ -160,6 +167,8 @@ services:
       context: ./thanos
       dockerfile: Dockerfile.thanos
     container_name: thanos_compactor
+    environment:
+      GOMAXPROCS: 2
     volumes:
       - ./data/compactor:/data
     command:
@@ -191,6 +200,8 @@ services:
     expose:
       - 10902
       - 10901
+    ports:
+      - "10922:10902"
     depends_on:
       - minio
 
@@ -200,6 +211,8 @@ services:
       context: ./thanos
       dockerfile: Dockerfile.thanos
     container_name: thanos_store
+    environment:
+      GOMAXPROCS: 2
     volumes:
       - ./data/store:/data
     command:
@@ -224,14 +237,67 @@ services:
       - "--store.grpc.series-max-concurrency=20"
       - "--sync-block-duration=3m"
       - "--block-sync-concurrency=20"
+    restart: unless-stopped
     expose:
       - 10902
       - 10901
     depends_on:
       - minio
     ports:
-      - '10911:10901'
       - '10912:10902'
+
+  # alertmanager:
+  #   image: prom/alertmanager:v0.21.0
+  #   container_name: alertmanager
+  #   user: root
+  #   volumes:
+  #     - ./prometheus:/etc/config/
+  #     - ./data/prometheus/alertmanager:/data
+  #   command:
+  #     - '--config.file=/etc/config/alertmanager.yml'
+  #   restart: unless-stopped
+  #   expose:
+  #     - 9093
+  #   ports:
+  #     - "9093:9093"
+
+  # thanos_rule:
+  #   build:
+  #     context: ./thanos
+  #     dockerfile: Dockerfile.thanos
+  #   container_name: thanos_rule
+  #   volumes:
+  #     - ./data/rule:/data
+  #     - ./thanos/rule:/etc/config/
+  #   command:
+  #     - "/wait-for-it.sh"
+  #     - "minio:9000"
+  #     - "--"
+  #     - "/thanos"
+  #     - "rule"
+  #     - "--log.level=debug"
+  #     - |
+  #       --objstore.config=type: S3
+  #       config: 
+  #           bucket: thanos-data-bucket
+  #           access_key: myaccesskey
+  #           secret_key: mysecretkey
+  #           endpoint: minio:9000
+  #           insecure: true
+  #     - "--data-dir=/data"
+  #     - "--log.format=logfmt"
+  #     - "--rule-file=/etc/config/rules.yml"
+  #     - "--alert.query-url=http://localhost:10902"
+  #     - "--alertmanagers.url=http://alertmanager:9093"
+  #     - "--query=thanos_querier:10902"
+  #   expose:
+  #     - 10902
+  #     - 10901
+  #   depends_on:
+  #     - minio
+  #   ports:
+  #     - '10932:10902'
+
   # grafana:
   #   image: grafana/grafana:6.4.1
   #   container_name: grafana
