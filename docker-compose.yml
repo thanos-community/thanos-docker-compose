@@ -16,8 +16,8 @@ services:
       - '--web.enable-lifecycle'
       - '--web.enable-admin-api'
       - '--web.listen-address=:9001'
-      - '--storage.tsdb.min-block-duration=2h'
-      - '--storage.tsdb.max-block-duration=2h'
+      - '--storage.tsdb.min-block-duration=5m'
+      - '--storage.tsdb.max-block-duration=5m'
     restart: unless-stopped
     expose:
       - 9001
@@ -40,8 +40,8 @@ services:
       - '--web.enable-lifecycle'
       - '--web.enable-admin-api'
       - '--web.listen-address=:9002'
-      - '--storage.tsdb.min-block-duration=2h'
-      - '--storage.tsdb.max-block-duration=2h'
+      - '--storage.tsdb.min-block-duration=5m'
+      - '--storage.tsdb.max-block-duration=5m'
     restart: unless-stopped
     expose:
       - 9002
