@@ -48,20 +48,24 @@ After running `make up` you would be able to access `minio` at `http://localhost
 | thanos_sidecar_one | First Thanos sidecar for prometheus_one                                      |       |
 | thanos_sidecar_two | Second Thanos sidecar for prometheus_two                                     |       |
 | thanos_querier     | Thanos querier instance connected to both sidecars and Thanos store          | 10902 |
-| thanos_compactor   | Thanos compactor running with `--wait` and `--wait-interval=3m`              |       |
-| thanos_store       | A Thanos store instance connected to minio                                   |       |
+| thanos_compactor   | Thanos compactor running with `--wait` and `--wait-interval=3m`              | 10922 |
+| thanos_store       | A Thanos store instance connected to minio                                   | 10912 |
 
 ### Optional services
 
 There are some services which are commented out in the `docker-compose.yml`. You can uncomment and use them if needed.
 
-| Service    |                                                                                                          | Ports |
-| ---------- | -------------------------------------------------------------------------------------------------------- | ----- |
-| grafana    | A Grafana instance with username = admin, and password = admin                                           | 3000  |
-| bucket_web | Thanos Bucket Inspector webUI                                                                            | 8080  |
-| debug      | A debug container running on ubuntu with `thanos` binary. You can use this to debug services from inside | 10902 |
+| Service      |                                                                                                          | Ports |
+| ------------ | -------------------------------------------------------------------------------------------------------- | ----- |
+| grafana      | A Grafana instance with username = admin, and password = admin                                           | 3000  |
+| bucket_web   | Thanos Bucket Inspector webUI                                                                            | 8080  |
+| debug        | A debug container running on ubuntu with `thanos` binary. You can use this to debug services from inside | 10902 |
+| alertmanager | Prometheus Alertmanager to send alerts                                                                   | 9093  |
+| thanos_rule  | Thanos Rule instance to create recording and alerting rules                                              | 10932 |
 
-You can start a debug container and/or Thanos Bucket WebUI by uncommenting the corresponding defination in `docker-compose.yml`
+You can start a debug container and/or Thanos Bucket WebUI by uncommenting the corresponding defination in `docker-compose.yml`.
+
+For Alertmanager to work, you need to set the Slack webhook URL in `prometheus/alertmanager.yml`.
 
 ## Credits
 

@@ -1,4 +1,5 @@
 THANOS_SOURCE ?= ../thanos
+COMPOSE_FILE ?= docker-compose.yml
 
 GOPATH            ?= $(shell go env GOPATH)
 GOBIN             ?= $(firstword $(subst :, ,${GOPATH}))/bin
@@ -21,14 +22,14 @@ up: $(THANOS_BINARY)
 	@echo ">> copying binaries to development env"
 	@rm -f ./thanos/thanos || true
 	cp "$(THANOS_BINARY)" ./thanos/
-	docker-compose up -d --build
+	docker-compose -f "$(COMPOSE_FILE)" up -d --build
 
 .PHONY: restart
 restart: ## Rebuilds and restarts the container without building the binary
 restart:
-	docker-compose up -d --build
+	docker-compose -f "$(COMPOSE_FILE)" up -d --build
 
 .PHONY: down
 down: ## Brings down the docker-compose setup
 down:
-	docker-compose down
+	docker-compose -f "$(COMPOSE_FILE)" down
