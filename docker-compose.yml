@@ -1,11 +1,9 @@
 version: '3.2'
 services:
   prometheus_one:
-    image: prom/prometheus:v2.20.0
+    image: prom/prometheus:v2.21.0
     container_name: prometheus_one
     user: root
-    environment:
-      GOMAXPROCS: 2
     volumes:
       - ./prometheus:/etc/config/
       - ./data/prometheus/one:/data
@@ -27,11 +25,9 @@ services:
       - "9001:9001"
 
   prometheus_two:
-    image: prom/prometheus:v2.20.0
+    image: prom/prometheus:v2.21.0
     container_name: prometheus_two
     user: root
-    environment:
-      GOMAXPROCS: 2
     volumes:
       - ./prometheus:/etc/config/
       - ./data/prometheus/two:/data
@@ -51,7 +47,7 @@ services:
       - 9002
 
   minio:
-    image: minio/minio:RELEASE.2020-05-16T01-33-21Z
+    image: minio/minio:RELEASE.2020-09-10T22-02-45Z
     container_name: minio
     volumes:
       - ./data/minio:/data
@@ -73,8 +69,6 @@ services:
       context: ./thanos
       dockerfile: Dockerfile.thanos
     container_name: thanos_sidecar_one
-    environment:
-      GOMAXPROCS: 2
     volumes:
       - ./prometheus:/etc/config/
       - ./data/prometheus/one:/data
@@ -107,8 +101,6 @@ services:
       context: ./thanos
       dockerfile: Dockerfile.thanos
     container_name: thanos_sidecar_two
-    environment:
-      GOMAXPROCS: 2
     volumes:
       - ./prometheus:/etc/config/
       - ./data/prometheus/two:/data
@@ -167,8 +159,6 @@ services:
       context: ./thanos
       dockerfile: Dockerfile.thanos
     container_name: thanos_compactor
-    environment:
-      GOMAXPROCS: 2
     volumes:
       - ./data/compactor:/data
     command:
@@ -211,8 +201,6 @@ services:
       context: ./thanos
       dockerfile: Dockerfile.thanos
     container_name: thanos_store
-    environment:
-      GOMAXPROCS: 2
     volumes:
       - ./data/store:/data
     command:
@@ -329,6 +317,7 @@ services:
   #           endpoint: minio:9000
   #           insecure: true
   #     - "--http-address=0.0.0.0:8080"
+  #     - "--label=monitor"
   #   expose:
   #     - 8080
   #   ports:
