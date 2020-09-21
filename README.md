@@ -6,7 +6,7 @@ Run a basic Thanos setup for local development using Docker and Docker Compose.
 
 - You need to have Docker and docker-compose installed on your machine.
 - We use GNU Make to run common tasks, you need to have `make` installed on your machine. You can run `make -v` to check if it is already installed.
-- Thanos source code. Easiest way to achieve this is by cloning the Thanos git repository locally using `git clone https://github.com/thanos-io/thanos`.
+- Thanos source code. The easiest way to achieve this is by cloning the Thanos git repository locally using `git clone https://github.com/thanos-io/thanos`.
 - You need to have Go installed as it is required to build Thanos.
 - Modify the `THANOS_SOURCE` variable in the `Makefile` so that it points to the directory containing Thanos source code. This step is required to build `thanos` binary from this directory.
 
@@ -25,7 +25,7 @@ Run a basic Thanos setup for local development using Docker and Docker Compose.
 ### Restarting the env with changes
 
 - We need to build the `thanos` binary again in case of changes in source code, just run `make up` to restart the containers with new changes, it takes care of building the binary for you.
-- If you want to skip building the binary, and just restart the docker containers (for example when you are testing different flags), you can run `make restart` to restart the conatiners.
+- If you want to skip building the binary, and just restart the docker containers (for example when you are testing different flags), you can run `make restart` to restart the containers.
 
 ### Checking status of containers
 
@@ -38,7 +38,7 @@ Refer to `docker-compose` documentation for a full overview.
 
 After running `make up` you would be able to access `minio` at `http://localhost:9000`. The access key is `myaccesskey` and the secret key is `mysecretkey`.
 
-## What does it starts?
+## What does it start?
 
 | Service            |                                                                              | Ports |
 | ------------------ | ---------------------------------------------------------------------------- | ----- |
@@ -58,12 +58,12 @@ There are some services which are commented out in the `docker-compose.yml`. You
 | Service      |                                                                                                          | Ports |
 | ------------ | -------------------------------------------------------------------------------------------------------- | ----- |
 | grafana      | A Grafana instance with username = admin, and password = admin                                           | 3000  |
-| bucket_web   | Thanos Bucket Inspector webUI                                                                            | 8080  |
+| bucket_web   | Thanos Bucket Inspector WebUI                                                                            | 8080  |
 | debug        | A debug container running on ubuntu with `thanos` binary. You can use this to debug services from inside | 10902 |
 | alertmanager | Prometheus Alertmanager to send alerts                                                                   | 9093  |
 | thanos_rule  | Thanos Rule instance to create recording and alerting rules                                              | 10932 |
 
-You can start a debug container and/or Thanos Bucket WebUI by uncommenting the corresponding defination in `docker-compose.yml`.
+You can start a debug container and/or Thanos Bucket WebUI by uncommenting the corresponding definition in `docker-compose.yml`.
 
 For Alertmanager to work, you need to set the Slack webhook URL in `prometheus/alertmanager.yml`.
 
