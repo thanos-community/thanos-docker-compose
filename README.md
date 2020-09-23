@@ -20,7 +20,7 @@ Run a basic Thanos setup for local development using Docker and Docker Compose.
 
 ### Stop the dev environment
 
-- Run `make stop`
+- Run `make down`
 
 ### Restarting the env with changes
 
