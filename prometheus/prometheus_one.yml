@@ -26,6 +26,11 @@ scrape_configs:
     static_configs:
       - targets: ['thanos_querier:10902']
 
+  - job_name: 'thanos_query_frontend'
+    scrape_interval: 100ms
+    static_configs:
+      - targets: ['thanos_query_frontend:19090']
+
   - job_name: 'thanos_compactor'
     scrape_interval: 100ms
     static_configs:

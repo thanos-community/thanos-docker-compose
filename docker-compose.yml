@@ -154,6 +154,32 @@ services:
     depends_on:
       - minio
 
+  thanos_query_frontend:
+    build:
+      context: ./thanos
+      dockerfile: Dockerfile.thanos
+    container_name: thanos_query_frontend
+    command:
+      - "/wait-for-it.sh"
+      - "thanos_querier:10901"
+      - "--"
+      - "/thanos"
+      - "query-frontend"
+      - "--log.level=debug"
+      - "--log.format=logfmt"
+      - "--http-address=0.0.0.0:19090"
+      - "--query-frontend.compress-responses"
+      - "--query-range.partial-response"
+      - "--query-frontend.downstream-url=http://thanos_querier:10902"
+      - "--query-range.split-interval=24h"
+      - "--query-range.max-retries-per-request=5"
+      - "--query-frontend.log-queries-longer-than=5s"
+      - "--cache-compression-type=snappy"
+    ports:
+      - "19090:19090"
+    depends_on:
+      - thanos_querier
+
   thanos_compactor:
     build:
       context: ./thanos
