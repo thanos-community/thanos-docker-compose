@@ -40,16 +40,17 @@ After running `make up` you would be able to access `minio` at `http://localhost
 
 ## What does it start?
 
-| Service            |                                                                              | Ports |
-| ------------------ | ---------------------------------------------------------------------------- | ----- |
-| prometheus_one     | The first Prometheus server                                                  | 9001  |
-| prometheus_two     | The second Prometheus server                                                 |       |
-| minio              | A minio instance serving as Object Storage for store, compactor and sidecars | 9000  |
-| thanos_sidecar_one | First Thanos sidecar for prometheus_one                                      |       |
-| thanos_sidecar_two | Second Thanos sidecar for prometheus_two                                     |       |
-| thanos_querier     | Thanos querier instance connected to both sidecars and Thanos store          | 10902 |
-| thanos_compactor   | Thanos compactor running with `--wait` and `--wait-interval=3m`              | 10922 |
-| thanos_store       | A Thanos store instance connected to minio                                   | 10912 |
+| Service               |                                                                              | Ports |
+| ------------------    | ---------------------------------------------------------------------------- | ----- |
+| prometheus_one        | The first Prometheus server                                                  | 9001  |
+| prometheus_two        | The second Prometheus server                                                 |       |
+| minio                 | A minio instance serving as Object Storage for store, compactor and sidecars | 9000  |
+| thanos_sidecar_one    | First Thanos sidecar for prometheus_one                                      |       |
+| thanos_sidecar_two    | Second Thanos sidecar for prometheus_two                                     |       |
+| thanos_querier        | Thanos querier instance connected to both sidecars and Thanos store          | 10902 |
+| thanos_query_frontend | Thanos query frontend connected to querier                                   | 19090 |
+| thanos_compactor      | Thanos compactor running with `--wait` and `--wait-interval=3m`              | 10922 |
+| thanos_store          | A Thanos store instance connected to minio                                   | 10912 |
 
 ### Optional services
 
