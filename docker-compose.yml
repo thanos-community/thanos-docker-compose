@@ -146,6 +146,7 @@ services:
       - "--store=thanos_store:10901"
       # - "--store=thanos_rule:10901"
       - "--store.sd-interval=5m"
+      - "--query.replica-label=monitor"
     expose:
       - 10902
       - 10901
