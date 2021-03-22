@@ -313,7 +313,7 @@ services:
   #     - '10932:10902'
 
   # grafana:
-  #   image: grafana/grafana:6.4.1
+  #   image: grafana/grafana:7.4.5
   #   container_name: grafana
   #   user: root
   #   environment:
