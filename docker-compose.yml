@@ -316,10 +316,13 @@ services:
   #   image: grafana/grafana:7.4.5
   #   container_name: grafana
   #   user: root
+  #   volumes:
+  #     - ./grafana/provisioning:/provisioning
   #   environment:
   #     - GF_SECURITY_ADMIN_USER=${ADMIN_USER:-admin}
   #     - GF_SECURITY_ADMIN_PASSWORD=${ADMIN_PASSWORD:-admin}
   #     - GF_USERS_ALLOW_SIGN_UP=false
+  #     - GF_PATHS_PROVISIONING=/provisioning
   #   restart: unless-stopped
   #   ports:
   #     - "3000:3000"
