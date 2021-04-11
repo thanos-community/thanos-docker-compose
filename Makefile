@@ -22,6 +22,9 @@ up: $(THANOS_BINARY)
 	@echo ">> copying binaries to development env"
 	@rm -f ./thanos/thanos || true
 	cp "$(THANOS_BINARY)" ./thanos/
+	@echo ">> copying dashboards to development env"
+	@rm -f ./grafana/provisioning/dashboards/*.json
+	cp $(THANOS_SOURCE)/examples/dashboards/*.json ./grafana/provisioning/dashboards
 	docker-compose -f "$(COMPOSE_FILE)" up -d --build
 
 .PHONY: restart

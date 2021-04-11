@@ -12,3 +12,5 @@ data/minio/thanos-data-bucket/*
 !.keep
 
 thanos/thanos
+
+grafana/provisioning/dashboards/*.json

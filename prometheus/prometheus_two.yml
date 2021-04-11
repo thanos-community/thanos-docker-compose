@@ -16,13 +16,11 @@ scrape_configs:
     static_configs:
       - targets: ['minio:9000']
 
-  - job_name: 'thanos_sidecar_two'
-    scrape_interval: 100ms
+  - job_name: 'thanos-sidecar_two'
     static_configs:
       - targets: ['thanos_sidecar_two:10902']
 
-  - job_name: 'thanos_querier'
-    scrape_interval: 100ms
+  - job_name: 'thanos-query'
     static_configs:
       - targets: ['thanos_querier:10902']
 
@@ -31,12 +29,10 @@ scrape_configs:
     static_configs:
       - targets: ["thanos_query_frontend:19090"]
 
-  - job_name: 'thanos_compactor'
-    scrape_interval: 100ms
+  - job_name: 'thanos-compact'
     static_configs:
       - targets: ['thanos_compactor:10902']
 
-  - job_name: 'thanos_store'
-    scrape_interval: 100ms
+  - job_name: 'thanos-store'
     static_configs:
       - targets: ['thanos_store:10902']

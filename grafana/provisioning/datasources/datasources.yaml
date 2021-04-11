@@ -1,0 +1,31 @@
+apiVersion: 1
+datasources:
+- name: Thanos Query-Frontend
+  type: prometheus
+  access: proxy
+  orgId: 1
+  url: http://thanos_query_frontend:19090
+  version: 1
+  editable: true
+  isDefault: true
+# - name: Thanos Querier
+#   type: prometheus
+#   access: proxy
+#   orgId: 1
+#   url: http://thanos_querier:10902
+#   version: 1
+#   editable: true
+# - name: Prometheus One
+#   type: prometheus
+#   access: proxy
+#   orgId: 1
+#   url: http://prometheus_one:9001
+#   version: 1
+#   editable: true
+# - name: Prometheus Two
+#   type: prometheus
+#   access: proxy
+#   orgId: 1
+#   url: http://prometheus_two:9002
+#   version: 1
+#   editable: true
