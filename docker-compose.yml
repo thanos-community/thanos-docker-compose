@@ -1,7 +1,7 @@
 version: '3.2'
 services:
   prometheus_one:
-    image: prom/prometheus:v2.21.0
+    image: prom/prometheus:v2.29.1
     container_name: prometheus_one
     user: root
     volumes:
@@ -25,7 +25,7 @@ services:
       - "9001:9001"
 
   prometheus_two:
-    image: prom/prometheus:v2.21.0
+    image: prom/prometheus:v2.29.1
     container_name: prometheus_two
     user: root
     volumes:
@@ -262,7 +262,7 @@ services:
       - '10912:10902'
 
   # alertmanager:
-  #   image: prom/alertmanager:v0.21.0
+  #   image: prom/alertmanager:v0.22.2
   #   container_name: alertmanager
   #   user: root
   #   volumes:
