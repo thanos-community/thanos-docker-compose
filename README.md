@@ -71,3 +71,8 @@ For Alertmanager to work, you need to set the Slack webhook URL in `prometheus/a
 ## Credits
 
 The `docker-compose.yml` is based on [PR#2583](https://github.com/thanos-io/thanos/pull/2583) on Thanos GitHub repo by [Darshan Chaudhary](https://github.com/darshanime)
+
+
+### Infrastructure model
+
+![Infrastructure model](.infragenie/infrastructure_model.png)
