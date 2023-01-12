@@ -4,7 +4,7 @@ Run a basic Thanos setup for local development using Docker and Docker Compose.
 
 ## Prerequisites
 
-- You need to have Docker and docker-compose installed on your machine.
+- You need to have Docker installed on your machine.
 - We use GNU Make to run common tasks, you need to have `make` installed on your machine. You can run `make -v` to check if it is already installed.
 - Thanos source code. The easiest way to achieve this is by cloning the Thanos git repository locally using `git clone https://github.com/thanos-io/thanos`.
 - You need to have Go installed as it is required to build Thanos.
@@ -29,10 +29,10 @@ Run a basic Thanos setup for local development using Docker and Docker Compose.
 
 ### Checking status of containers
 
-- You can run `docker-compose ps` to list all containers running.
-- Run `docker-compose logs <container-name>` to view logs for a container.
+- You can run `docker compose ps` to list all containers running.
+- Run `docker compose logs <container-name>` to view logs for a container.
 
-Refer to `docker-compose` documentation for a full overview.
+Refer to `docker compose` documentation for a full overview.
 
 ### Connecting to minio
 
